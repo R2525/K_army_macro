@@ -79,10 +79,6 @@ if ready == "ready":
     driver.switch_to.frame('main')
     driver.find_element(By.CSS_SELECTOR, 'li.m3 > a').click()
     driver.find_element(By.CSS_SELECTOR,' span:nth-child(1) > a').click()
-    #element = driver.find_element("input_element_name")
-    #element.send_keys(Keys.RETURN)
-    #element = driver.find_element(By.XPATH, "//body")
-    #element.send_keys(Keys.ENTER)
     if WebDriverWait(driver, 3).until(EC.alert_is_present()):
         driver.switch_to.alert.dismiss()
     
@@ -102,7 +98,7 @@ if startkey == "start":
     #첫번째 날짜 선택까지 반복(예외처리)
      while True:
          try:
-             #child 3번 부터 1번째 선택
+             #child 3번 -> 1번째 날짜 선택 (날짜 선택 코드 tr:nth-child(3) 부분을 수정)
             driver.find_element(By.CSS_SELECTOR, 'tr:nth-child(3) > td:nth-child(1) > a').click() #3번 부터 시작
             break  
          except:   
@@ -153,84 +149,3 @@ if startkey == "start":
 print("end")
 time.sleep(2)
 # driver.quit()
-'''
-while True:
-    try:
-        print("type 'start'")
-        startkey = '0'
-        startkey = input()
-        print('1')
-        if startkey == "start":
-            print('2')
-                
-            driver.find_element(By.CSS_SELECTOR,'li:nth-child(1) > span > a').click()
-            print('3')
-            #창로딩될 때까지 확인후 전환
-            while driver.window_handles[-1] == driver.window_handles[0]:
-                print(driver.window_handles[-1])
-            
-            driver.switch_to.window(driver.window_handles[-1])
-            #첫번째 날짜 선택까지 반복(예외처리)
-            while True:
-                try:
-                    #child 3번 부터 1번째 선택
-                    driver.find_element(By.CSS_SELECTOR, 'tr:nth-child(3) > td:nth-child(1) > a').click() #3번 부터 시작
-                    break  
-                except:   
-                    pass
-                
-            print('current window1',driver.window_handles,len(driver.window_handles))
-            
-            print('-------------------')
-            time.sleep(0.03)
-            imgbinary()
-            imgocr()
-            print("is", image_ocr,len(image_ocr))
-            driver.find_element(By.CSS_SELECTOR,'#answer').send_keys(image_ocr)
-            driver.find_element(By.CSS_SELECTOR,'th:nth-child(6) > span > input[type=button]').click()
-            numtry += 1
-            try:
-                    WebDriverWait(driver, 3).until(EC.alert_is_present())
-                    print("-----------------------------alert accur------------------------------")
-                    
-                    alert = driver.switch_to.alert
-                    err_Occur = 1
-                    alert.dismiss()
-                    
-            except:
-                print("no alert")
-            
-            
-            
-            while len(driver.window_handles) ==2:
-                print(driver.window_handles)
-                driver.find_element(By.XPATH,'//*[@id="reLoad"]').click()
-                tryChaptchaAgain()
-                driver.find_element(By.CSS_SELECTOR,'#answer').send_keys(image_ocr)
-                driver.find_element(By.CSS_SELECTOR,'th:nth-child(6) > span > input[type=button]').click()
-                numtry += 1
-                try:
-                    WebDriverWait(driver, 3).until(EC.alert_is_present())
-                    print("-----------------------------alert accur------------------------------")
-                    
-                    alert = driver.switch_to.alert
-                    err_Occur = 1
-                    alert.dismiss()
-                    
-                except:
-                    print("no alert")
-        
-        print('4')
-
-            # Switch to the new window
-            
-            
-            
-        print("end")
-    except:
-        print('error')
-        pass
-    time.sleep(3)
-        
-    driver.switch_to.window(driver.window_handles[0])
-'''
